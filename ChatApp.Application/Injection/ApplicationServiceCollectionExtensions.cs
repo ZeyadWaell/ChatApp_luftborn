@@ -1,12 +1,11 @@
 ﻿using ChatApp.Application.BotStrategies;
 using ChatApp.Application.CQRS.Commands.Auth;
-using ChatApp.Application.Services.CQRSS.inteface;
-using ChatApp.Application.Services.CQRSS;
 using ChatApp.Application.Strategies.Bot;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using ChatApp.Application.Services;
+using ChatApp.Application.Services.inteface;
 
 public static class ApplicationServiceCollectionExtensions
 {

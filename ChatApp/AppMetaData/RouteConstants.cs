@@ -15,6 +15,11 @@
     public class ChatRoutes : BaseRoute
     {
         public const string Controller = Base + "/chat";
+        public const string SendMessage = "send";
+        public const string JoinRoom = "join";
+        public const string LeaveRoom = "leave";
+        public const string EditMessage = "edit";
+        public const string DeleteMessage = "delete";
     }
 
     public class RoomRoutes : BaseRoute

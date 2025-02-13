@@ -1,6 +1,6 @@
 ﻿using ChatApp.Application.CQRS.Auth.Commands.Models;
 using ChatApp.Application.CQRS.Auth.Commands.Response;
-using ChatApp.Application.Services.CQRSS.inteface;
+using ChatApp.Application.Services.inteface;
 using ChatApp.Application.Utilities.Class;
 using MediatR;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;

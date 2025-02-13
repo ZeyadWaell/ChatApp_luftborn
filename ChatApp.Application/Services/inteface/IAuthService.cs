@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatApp.Application.Services.CQRSS.inteface
+namespace ChatApp.Application.Services.inteface
 {
     public interface IAuthService
     {

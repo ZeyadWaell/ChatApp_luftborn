@@ -1,34 +1,63 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using ChatApp.Application.CQRS.Commands.Chat.Models;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Threading.Tasks;
 
 namespace ChatApp.Api.Hubs
 {
+    [Authorize]
     public class ChatHub : Hub
     {
-        public async Task JoinRoom(string roomName, string userName)
+        private readonly IMediator _mediator;
+
+        public ChatHub(IMediator mediator)
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
-            await Clients.Group(roomName).SendAsync("UserJoined", userName, $"{userName} has joined {roomName}");
+            _mediator = mediator;
         }
 
-        public async Task LeaveRoom(string roomName, string userName)
+        public async Task SendMessage(SendMessageRequest command)
         {
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomName);
-            await Clients.Group(roomName).SendAsync("UserLeft", userName, $"{userName} has left {roomName}");
+            var response = await _mediator.Send(command);
+
+            if (response.Success)
+            {
+                // Broadcast the message to everyone in the chat room
+                await Clients.Group(command.ChatRoomId.ToString()).SendAsync("ReceiveMessage", response.Data);
+            }
         }
 
-        public async Task SendMessage(string roomName, string userName, string message)
+        public async Task EditMessage(EditMessageRequest command)
         {
-            await Clients.Group(roomName).SendAsync("ReceiveMessage", userName, message);
+            var response = await _mediator.Send(command);
+
+            if (response.Success)
+            {
+                await Clients.Group(command.ChatRoomId.ToString()).SendAsync("MessageEdited", response.Data);
+            }
         }
 
-        public async Task EditMessage(string roomName, int messageId, string userName, string newContent)
+        public async Task DeleteMessage(DeleteMessageRequest command)
         {
-            await Clients.Group(roomName).SendAsync("MessageEdited", messageId, userName, newContent);
+            var response = await _mediator.Send(command);
+
+            if (response.Success)
+            {
+                await Clients.Group(command.ChatRoomId.ToString()).SendAsync("MessageDeleted", command.MessageId);
+            }
         }
 
-        public async Task DeleteMessage(string roomName, int messageId, string userName)
+        public async Task JoinRoom(int chatRoomId)
         {
-            await Clients.Group(roomName).SendAsync("MessageDeleted", messageId, userName);
+            await Groups.AddToGroupAsync(Context.ConnectionId, chatRoomId.ToString());
+            await Clients.Group(chatRoomId.ToString()).SendAsync("UserJoined", Context.User.Identity.Name);
+        }
+
+        public async Task LeaveRoom(int chatRoomId)
+        {
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, chatRoomId.ToString());
+            await Clients.Group(chatRoomId.ToString()).SendAsync("UserLeft", Context.User.Identity.Name);
         }
     }
 }

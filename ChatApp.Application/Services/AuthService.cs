@@ -1,5 +1,4 @@
-﻿using ChatApp.Application.Services.CQRSS.inteface;
-using ChatApp.Application.Utilities.Class;
+﻿using ChatApp.Application.Utilities.Class;
 using ChatApp.Application.Utilities;
 using ChatApp.Core.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -11,8 +10,9 @@ using System.Threading.Tasks;
 using ChatApp.Application.CQRS.Auth.Commands.Validator;
 using ChatApp.Application.CQRS.Auth.Commands.Models;
 using ChatApp.Application.CQRS.Auth.Commands.Response;
+using ChatApp.Application.Services.inteface;
 
-namespace ChatApp.Application.Services.CQRSS
+namespace ChatApp.Application.Services
 {
     public class AuthService : IAuthService
     {

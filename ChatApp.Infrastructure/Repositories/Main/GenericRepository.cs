@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ChatApp.Infrastructure.Data;
 using ChatApp.Core.Interfaces.Main;
+using System.Linq.Expressions;
 
 namespace ChatApp.Infrastructure.Repositories.Main
 {
@@ -31,6 +32,10 @@ namespace ChatApp.Infrastructure.Repositories.Main
             return _dbContext.Set<T>().AsNoTracking().AsQueryable();
         }
 
+        public virtual async Task<T> GetByConditionAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbContext.Set<T>().Where(predicate).FirstOrDefaultAsync();
+        }
 
         public virtual async Task AddRangeAsync(ICollection<T> entities)
         {

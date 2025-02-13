@@ -10,5 +10,7 @@ namespace ChatApp.Infrastructure.Repositories
 {
     public interface IChatMessageRepository : IGenericRepository<ChatMessage>
     {
+        Task<List<ChatMessage>> GetMessagesByChatRoomAsync(Guid chatRoomId);
+
     }
 }
