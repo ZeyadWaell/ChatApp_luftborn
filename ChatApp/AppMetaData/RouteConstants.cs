@@ -1,4 +1,4 @@
-﻿namespace ChatApp.Api.AppMetaData
+﻿namespace ChatApp.Routes
 {
     public abstract class BaseRoute
     {

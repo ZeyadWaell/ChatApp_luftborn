@@ -11,6 +11,7 @@ namespace ChatApp.Core.Entities
     public class ChatMessage : BaseEntity
     {
         public string UserId { get; set; }
+
         [ForeignKey(nameof(UserId))]
         public ApplicationUser User { get; set; }
 
@@ -18,13 +19,13 @@ namespace ChatApp.Core.Entities
 
         public DateTime Timestamp { get; set; }
 
-        public int ChatRoomId { get; set; }
+        public Guid ChatRoomId { get; set; }
+
         [ForeignKey(nameof(ChatRoomId))]
         public ChatRoom ChatRoom { get; set; }
 
         public bool IsBotMessage { get; set; }
 
         public ChatBotInteraction ChatBotInteraction { get; set; }
-
     }
 }
