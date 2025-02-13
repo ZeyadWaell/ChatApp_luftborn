@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ChatApp.Infrastructure.Data;
 using ChatApp.Core.Interfaces;
 using ChatApp.Infrastructure.Repositories;
+using ChatApp.Infrastructure.ExternalServices;
 
 
 namespace ChatApp.Infrastructure.Injection
