@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Core.Entities
 {
-    class ChatBotInteraction : BaseEntity
+    public class ChatBotInteraction : BaseEntity
     {
 
         public Guid TriggerMessageId { get; set; }

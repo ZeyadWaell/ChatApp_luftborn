@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Core.Entities
 {
-    class ChatRoom : BaseEntity
+    public class ChatRoom : BaseEntity
     {
 
         public string Name { get; set; }

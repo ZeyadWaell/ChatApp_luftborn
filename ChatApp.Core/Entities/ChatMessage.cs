@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Core.Entities
 {
-    class ChatMessage : BaseEntity
+    public class ChatMessage : BaseEntity
     {
         public string UserId { get; set; }
         [ForeignKey(nameof(UserId))]

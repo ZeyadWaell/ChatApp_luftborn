@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Core.Entities
 {
-    class ChatRoomMember : BaseEntity
+    public class ChatRoomMember : BaseEntity
     {
 
         public Guid ChatRoomId { get; set; }
