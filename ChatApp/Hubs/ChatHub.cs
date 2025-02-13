@@ -1,4 +1,6 @@
-﻿using ChatApp.Application.CQRS.Commands.Chat.Models;
+﻿using ChatApp.Application.CQRS.ChatMessage.Commands.Models;
+using ChatApp.Application.CQRS.Commands.Chat.Models;
+using ChatApp.Application.CQRS.Requests.Chat.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
@@ -44,7 +46,7 @@ namespace ChatApp.Api.Hubs
 
             if (response.Success)
             {
-                await Clients.Group(command.ChatRoomId.ToString()).SendAsync("MessageDeleted", command.MessageId);
+                await Clients.Group(command.MessageId.ToString()).SendAsync("MessageDeleted", command.MessageId);
             }
         }
 

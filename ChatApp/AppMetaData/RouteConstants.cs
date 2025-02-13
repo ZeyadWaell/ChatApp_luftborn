@@ -20,6 +20,7 @@
         public const string LeaveRoom = "leave";
         public const string EditMessage = "edit";
         public const string DeleteMessage = "delete";
+        public const string GetMessages = "messages";
     }
 
     public class RoomRoutes : BaseRoute

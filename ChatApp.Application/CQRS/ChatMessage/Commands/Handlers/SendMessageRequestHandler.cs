@@ -1,5 +1,6 @@
 ﻿using ChatApp.Application.CQRS.ChatMessage.Commands.Models;
 using ChatApp.Application.CQRS.ChatMessage.Queries.Response;
+using ChatApp.Application.Services.inteface;
 using ChatApp.Application.Utilities;
 using ChatApp.Application.Utilities.Class;
 using ChatApp.Core.Entities;
@@ -13,34 +14,17 @@ namespace ChatApp.Application.CQRS.Requests.Chat.Handlers
 {
     public class SendMessageRequestHandler : IRequestHandler<SendMessageRequest, ApiResponse<ChatMessageResponse>>
     {
-        private readonly IChatMessageRepository _chatMessageRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IChatService _chatService;
 
-        public SendMessageRequestHandler(IChatMessageRepository chatMessageRepository, IUnitOfWork unitOfWork)
+        public SendMessageRequestHandler(IChatService chatService)
         {
-            _chatMessageRepository = chatMessageRepository;
-            _unitOfWork = unitOfWork;
+            _chatService = chatService;
         }
+
 
         public async Task<ApiResponse<ChatMessageResponse>> Handle(SendMessageRequest request, CancellationToken cancellationToken)
         {
-            var message = new ChatMessage
-            {
-                UserId = request.UserName,
-                ChatRoomId = request.ChatRoomId,
-                Message = request.Message,
-                Timestamp = DateTime.UtcNow
-            };
-
-            await _chatMessageRepository.AddAsync(message);
-            await _unitOfWork.CommitAsync();
-
-            return ResponseHandler.Success(new ChatMessageResponse
-            {
-                MessageId = message.Id,
-                Message = message.Message,
-                Timestamp = message.Timestamp
-            }, "Message sent successfully.");
+           return await _chatService.SendMessageAsync(request);
         }
     }
 }

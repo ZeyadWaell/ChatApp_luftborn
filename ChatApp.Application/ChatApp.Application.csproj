@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Services\ChatService.cs~RF1dd032c.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="CQRS\Auth\Commands\Validator\" />
     <Folder Include="CQRS\Auth\Queries\Handlers\" />
     <Folder Include="CQRS\Auth\Queries\Models\" />

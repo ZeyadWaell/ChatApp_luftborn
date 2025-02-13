@@ -1,43 +1,28 @@
-﻿using ChatApp.Application.CQRS.Queries.ChatRoom.Models;
-using ChatApp.Application.DTOs;
+﻿using ChatApp.Application.CQRS.ChatMessage.Queries.Models;
+using ChatApp.Application.CQRS.ChatMessage.Queries.Response;
+using ChatApp.Application.Services;
+using ChatApp.Application.Services.inteface;
 using ChatApp.Application.Utilities;
 using ChatApp.Application.Utilities.Class;
-using ChatApp.Core.Interfaces;
-using ChatApp.Infrastructure.Repositories;
 using MediatR;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ChatApp.Application.CQRS.ChatMessage.Queries.Handlers;
-
-public class GetChatRoomMessagesRequestHandler : IRequestHandler<GetChatRoomMessagesRequest, ApiResponse<List<ChatRoomMessagesResponse>>>
+namespace ChatApp.Application.CQRS.ChatMessage.Queries.Handlers
 {
-    private readonly IChatMessageRepository _chatMessageRepository;
-
-    public GetChatRoomMessagesRequestHandler(IChatMessageRepository chatMessageRepository)
+    public class GetChatRoomMessagesRequestHandler : IRequestHandler<GetChatRoomMessagesQuery, ApiResponse<IList<ChatMessageResponse>>>
     {
-        _chatMessageRepository = chatMessageRepository;
-    }
+        private readonly IChatService _chatService;
 
-    public async Task<ApiResponse<List<ChatRoomMessagesResponse>>> Handle(GetChatRoomMessagesRequest request, CancellationToken cancellationToken)
-    {
-        var messages = await _chatMessageRepository.GetMessagesByChatRoomAsync(request.ChatRoomId);
-
-        if (messages == null || !messages.Any())
+        public GetChatRoomMessagesRequestHandler(IChatService chatService)
         {
-            return ResponseHandler.Failure<List<ChatRoomMessagesResponse>>("No messages found for this chat room.");
+            _chatService = chatService;
         }
 
-        var response = messages.Select(m => new ChatRoomMessagesResponse
+        public async Task<ApiResponse<IList<ChatMessageResponse>>> Handle(GetChatRoomMessagesQuery request, CancellationToken cancellationToken)
         {
-            MessageId = m.Id,
-            Message = m.Message,
-            Sender = m.User.UserName,
-            Timestamp = m.Timestamp
-        }).ToList();
-
-        return ResponseHandler.Success(response, "Messages retrieved successfully.");
+            return await _chatService.GetChatRoomMessagesAsync(request.ChatRoomId);
+        }
     }
 }

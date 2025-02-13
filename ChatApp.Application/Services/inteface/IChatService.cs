@@ -15,8 +15,7 @@ namespace ChatApp.Application.Services.inteface
     {
         Task<ApiResponse<ChatMessageResponse>> SendMessageAsync(SendMessageRequest request);
         Task<ApiResponse<EditMessageResponse>> EditMessageAsync(EditMessageRequest request);
-        Task<ApiResponse<DeleteMessageResponse>> DeleteMessageAsync(DeleteMessageRequest request);
-        Task<ApiResponse<List<ChatRoomMessagesResponse>>> GetChatRoomMessagesAsync(string chatRoomId);
+        Task<ApiResponse<IList<ChatMessageResponse>>> GetChatRoomMessagesAsync(Guid chatRoomId);
 
     }
 }

@@ -1,4 +1,6 @@
 ﻿using ChatApp.Application.CQRS.ChatMessage.Commands.Models;
+using ChatApp.Application.CQRS.ChatMessage.Queries.Models;
+using ChatApp.Application.CQRS.Requests.Chat.Models;
 using ChatApp.Routes;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -39,15 +41,6 @@ namespace ChatApp.Api.Controllers
             return BadRequest(response);
         }
 
-        [HttpDelete($"{ChatRoutes.DeleteMessage}" + "/{messageId}")]
-        public async Task<IActionResult> DeleteMessage(int messageId)
-        {
-            var command = new DeleteMessageCommand { MessageId = messageId };
-            var response = await _mediator.Send(command);
-            if (response.Success)
-                return Ok(response);
-            return BadRequest(response);
-        }
 
         [HttpPost(ChatRoutes.JoinRoom)]
         public async Task<IActionResult> JoinRoom([FromBody] JoinRoomRequest command)
@@ -67,8 +60,17 @@ namespace ChatApp.Api.Controllers
             return BadRequest(response);
         }
 
-        [HttpGet("get-messages/{chatRoomId}")]
-        public async Task<IActionResult> GetMessagesByRoom(int chatRoomId)
+        [HttpPost(ChatRoutes.DeleteMessage)]
+        public async Task<IActionResult> Delete([FromBody] DeleteMessageRequest command)
+        {
+            var response = await _mediator.Send(command);
+            if (response.Success)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
+        [HttpPut($"{ChatRoutes.GetMessages}" + "/{chatRoomId}")]
+        public async Task<IActionResult> GetMessagesByRoom(Guid chatRoomId)
         {
             var query = new GetChatRoomMessagesQuery { ChatRoomId = chatRoomId };
             var response = await _mediator.Send(query);
