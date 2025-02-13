@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Api.Hubs
 {
-    [Authorize]
+    [AllowAnonymous] 
+
     public class ChatHub : Hub
     {
         private readonly IMediator _mediator;

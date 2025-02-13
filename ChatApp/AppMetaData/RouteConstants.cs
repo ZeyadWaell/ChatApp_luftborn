@@ -16,13 +16,19 @@
     {
         public const string Controller = Base + "/chat";
         public const string SendMessage = "send";
-        public const string JoinRoom = "join";
-        public const string LeaveRoom = "leave";
+
         public const string EditMessage = "edit";
         public const string DeleteMessage = "delete";
         public const string GetMessages = "messages";
     }
 
+    public class  ChatRoomsRoutes : BaseRoute
+    {
+        public const string Controller = Base + "/chatRooms";
+        public const string JoinRoom = "join";
+        public const string LeaveRoom = "leave";
+
+    }
     public class RoomRoutes : BaseRoute
     {
         public const string Controller = Base + "/room";

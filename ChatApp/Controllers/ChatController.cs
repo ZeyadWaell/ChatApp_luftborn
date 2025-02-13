@@ -12,7 +12,7 @@ namespace ChatApp.Api.Controllers
 
     [Route(ChatRoutes.Controller)]
     [ApiController]
-    [Authorize]
+   //Authorize]
     public class ChatController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -41,24 +41,6 @@ namespace ChatApp.Api.Controllers
             return BadRequest(response);
         }
 
-
-        [HttpPost(ChatRoutes.JoinRoom)]
-        public async Task<IActionResult> JoinRoom([FromBody] JoinRoomRequest command)
-        {
-            var response = await _mediator.Send(command);
-            if (response.Success)
-                return Ok(response);
-            return BadRequest(response);
-        }
-
-        [HttpPost(ChatRoutes.LeaveRoom)]
-        public async Task<IActionResult> LeaveRoom([FromBody] LeaveRoomRequest command)
-        {
-            var response = await _mediator.Send(command);
-            if (response.Success)
-                return Ok(response);
-            return BadRequest(response);
-        }
 
         [HttpPost(ChatRoutes.DeleteMessage)]
         public async Task<IActionResult> Delete([FromBody] DeleteMessageRequest command)

@@ -11,6 +11,7 @@ namespace ChatApp.Application.CQRS.ChatMessage.Commands.Models
 {
     public class EditMessageRequest : IRequest<ApiResponse<EditMessageResponse>>
     {
+        public int MessageId { get; set; }
         public string UserName { get; set; }
         public string ChatRoomId { get; set; }
         public string NewContent { get; set; }
