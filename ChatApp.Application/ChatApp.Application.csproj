@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BotStrategies\" />
+    <Folder Include="Strategies\" />
     <Folder Include="CQRS\ChatMessage\Commands\Handlers\" />
     <Folder Include="CQRS\ChatMessage\Commands\Models\" />
-    <Folder Include="CQRS\ChatMessage\Commands\Results\" />
+    <Folder Include="CQRS\ChatMessage\Commands\Validator\" />
     <Folder Include="CQRS\ChatMessage\Queries\Handlers\" />
     <Folder Include="CQRS\ChatMessage\Queries\Models\" />
-    <Folder Include="CQRS\ChatMessage\Queries\Results\" />
+    <Folder Include="CQRS\ChatMessage\Queries\Response\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
