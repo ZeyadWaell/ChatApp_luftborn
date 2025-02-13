@@ -9,8 +9,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using ChatApp.Api.AppMetaData;
-using ChatApp.Api.Injection;
+using ChatApp.API.Injection;
 using ChatApp.Api.ModuleInfrastructureDependencies;
+using ChatApp.Api.Hubs;
 
 namespace ChatApp
 {
@@ -55,7 +56,7 @@ namespace ChatApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>(RouteConstants.ChatHubRoute);
+                endpoints.MapHub<ChatHub>(ChatHubRoutes.Hub);
             });
 
             app.Run();

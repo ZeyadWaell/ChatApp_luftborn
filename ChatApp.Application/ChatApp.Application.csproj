@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Strategies\" />
     <Folder Include="CQRS\ChatMessage\Commands\Handlers\" />
     <Folder Include="CQRS\ChatMessage\Commands\Models\" />
     <Folder Include="CQRS\ChatMessage\Commands\Validator\" />

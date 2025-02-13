@@ -1,4 +1,5 @@
-﻿using ChatApp.Core.Interfaces.Main;
+﻿using ChatApp.Application.Strategies.Bot;
+using ChatApp.Core.Interfaces.Main;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ChatApp.Api.ModuleInfrastructureDependencies
@@ -8,10 +9,9 @@ namespace ChatApp.Api.ModuleInfrastructureDependencies
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             // Register MediatR, services, and AutoMapper if needed.
-     //       services.AddMediatR(typeof(CreateChatMessageCommand).Assembly);
-     //       services.AddTransient<IChatMessageService, ChatMessageService>();
-      //      services.AddTransient<IBotStrategyFactory, BotStrategyFactory>();
-            // Other application service registrations.
+            services.AddMediatR(typeof(CreateChatMessageCommand).Assembly);
+            services.AddTransient<IChatMessageService, ChatMessageService>();
+            services.AddTransient<IBotStrategyFactory, BotStrategyFactory>();
             return services;
         }
     }
