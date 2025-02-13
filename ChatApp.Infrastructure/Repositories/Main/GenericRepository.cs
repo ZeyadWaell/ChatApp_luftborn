@@ -67,12 +67,6 @@ namespace ChatApp.Infrastructure.Repositories.Main
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task SaveChangesAsync()
-        {
-            await _dbContext.SaveChangesAsync();
-        }
-
-
 
         public IDbContextTransaction BeginTransaction()
         {
@@ -81,17 +75,7 @@ namespace ChatApp.Infrastructure.Repositories.Main
             return _dbContext.Database.BeginTransaction();
         }
 
-        public void Commit()
-        {
-            _dbContext.Database.CommitTransaction();
 
-        }
-
-        public void RollBack()
-        {
-            _dbContext.Database.RollbackTransaction();
-
-        }
 
         public IQueryable<T> GetTableAsTracking()
         {

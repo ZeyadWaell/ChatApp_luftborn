@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatApp.Application.Strategies.Bot
+namespace ChatApp.Core.Interfaces
 {
-    public class BotStrategyFactory
+    public interface IBotStrategy
     {
+        Task<string> ProcessMessageAsync(string message);
     }
 }

@@ -11,10 +11,8 @@ namespace ChatApp.Core.Interfaces.Main
     {
         Task DeleteRangeAsync(ICollection<T> entities);
         Task<T> GetByIdAsync(int id);
-        Task SaveChangesAsync();
         IDbContextTransaction BeginTransaction();
-        void Commit();
-        void RollBack();
+
         IQueryable<T> GetTableNoTracking();
         IQueryable<T> GetTableAsTracking();
         Task<T> AddAsync(T entity);
