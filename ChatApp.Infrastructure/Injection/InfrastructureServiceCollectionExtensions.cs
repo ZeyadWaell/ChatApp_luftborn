@@ -7,6 +7,8 @@ using ChatApp.Infrastructure.Repositories;
 using ChatApp.Infrastructure.ExternalServices;
 using ChatApp.Core.Interfaces.Main;
 using ChatApp.Infrastructure.Repositories.Main;
+using ChatApp.Core.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace ChatApp.Infrastructure.Injection
 {
@@ -16,17 +18,21 @@ namespace ChatApp.Infrastructure.Injection
         {
             services.AddDbContext<ApplicationIdentityDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
+
             services.AddDbContext<ChatDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("ChatConnection")));
 
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
+            // ✅ Register Repositories and Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
             services.AddScoped<IChatRoomRepository, ChatRoomRepository>();
             services.AddScoped<IChatRoomMemberRepository, ChatRoomMemberRepository>();
 
-
-
+            // ✅ Register AI Bot Strategies
             services.AddTransient<IBotStrategy, GeminiBotStrategy>();
             services.AddTransient<IBotStrategy, ChatGPTBotStrategy>();
 

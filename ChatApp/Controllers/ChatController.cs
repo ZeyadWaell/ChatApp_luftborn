@@ -68,8 +68,8 @@ namespace ChatApp.Api.Controllers
                 return Ok(response);
             return BadRequest(response);
         }
-
-        [HttpPut($"{ChatRoutes.GetMessages}" + "/{chatRoomId}")]
+        
+        [HttpGet($"{ChatRoutes.GetMessages}" + "/{chatRoomId}")]
         public async Task<IActionResult> GetMessagesByRoom(Guid chatRoomId)
         {
             var query = new GetChatRoomMessagesQuery { ChatRoomId = chatRoomId };

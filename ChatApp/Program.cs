@@ -1,9 +1,5 @@
 
 using ChatApp.Infrastructure.Injection;
-using ChatApp.Infrastructure.Data;
-using ChatApp.Core.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using ChatApp.API.Injection;
 using ChatApp.Api.Hubs;
 using ChatApp.Routes;
@@ -21,14 +17,6 @@ namespace ChatApp
                 .AddApiServices()
                 .AddInfrastructureServices(configuration);
 
-            builder.Services.AddDbContext<ApplicationIdentityDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("IdentityConnection")));
-            builder.Services.AddDbContext<ChatDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("ChatConnection")));
-
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
-                .AddDefaultTokenProviders();
 
             builder.Services.AddControllers();
             builder.Services.AddSignalR();
@@ -44,9 +32,10 @@ namespace ChatApp
             }
 
             app.UseHttpsRedirection();
-            app.UseAuthentication();
-            app.UseAuthorization();
+
             app.UseRouting();
+            app.UseAuthentication();  
+            app.UseAuthorization();   
 
             app.UseEndpoints(endpoints =>
             {

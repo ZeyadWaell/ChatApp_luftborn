@@ -8,18 +8,23 @@ using ChatApp.Application.Services.inteface;
 using ChatApp.Application.Utilities.Class;
 using ChatApp.Core.Interfaces.Main;
 using ChatApp.Infrastructure.Repositories;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace ChatApp.Application.Services
 {
     public class ChatService : IChatService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ChatService(IChatMessageRepository chatMessageRepository, IUnitOfWork unitOfWork)
+        public ChatService(IChatMessageRepository chatMessageRepository, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
+            _httpContextAccessor = httpContextAccessor;
         }
-        
+
         public async Task<ApiResponse<ChatRoomResponse>> LeaveRoomAsync(LeaveRoomRequest request)
         {
             var response = new ChatRoomResponse
@@ -33,14 +38,18 @@ namespace ChatApp.Application.Services
         }
 
 
+
+        public ChatBotInteraction ChatBotInteraction { get; set; }
         public async Task<ApiResponse<ChatMessageResponse>> SendMessageAsync(SendMessageRequest request)
         {
             var message = new ChatMessage
             {
-                UserId = request.UserName,
+                Id = Guid.NewGuid(),
+                UserId = _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier),
                 ChatRoomId = request.ChatRoomId,
                 Message = request.Message,
-                Timestamp = DateTime.UtcNow
+                Timestamp = DateTime.UtcNow,
+                IsBotMessage = false,
             };
 
             await _unitOfWork.ChatMessageRepository.AddAsync(message);

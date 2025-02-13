@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChatApp.Infrastructure.Migrations.IdentityMigrations
 {
     [DbContext(typeof(ApplicationIdentityDbContext))]
-    [Migration("20250213162407_InitialIdentityMigration")]
+    [Migration("20250213225327_InitialIdentityMigration")]
     partial class InitialIdentityMigration
     {
         /// <inheritdoc />
