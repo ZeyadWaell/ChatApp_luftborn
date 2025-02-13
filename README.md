@@ -15,3 +15,5 @@ This project follows a **scalable software architecture** using industry-standar
 | **Result Pattern** | Standardized API responses using `ApiResponse<T>` to ensure **consistency and error handling**. |
 | **Adapter Pattern** | Allows **seamless integration of multiple chatbot APIs** by adapting different responses into a unified structure. |
 | **Dependency Injection** | Ensures loose coupling of services and repositories. |
+| **Generic Pattern** | Generic Type Object |
+
