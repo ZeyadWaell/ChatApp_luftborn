@@ -1,5 +1,6 @@
 ﻿using ChatApp.Core.Interfaces.Main;
 using ChatApp.Infrastructure.Repositories.Main;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ChatApp.Api.ModuleInfrastructureDependencies
 {
