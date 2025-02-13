@@ -13,6 +13,8 @@ public static class ApplicationServiceCollectionExtensions
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(LoginUserCommandHandler).Assembly));
 
+
+        services.AddTransient<IChatService, ChatService>();
         services.AddTransient<ITokenService, TokenService>();
         services.AddTransient<IBotStrategyFactory, BotStrategyFactory>();
         services.AddTransient<IAuthService, AuthService>();

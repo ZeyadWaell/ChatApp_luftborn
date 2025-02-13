@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Application.CQRS.ChatMessage.Commands.Models
 {
-    public class JoinRoomRequest : IRequest<ApiResponse<ChatRoomResponse>>
+    public class LeaveRoomRequest : IRequest<ApiResponse<ChatRoomResponse>>
     {
         public string ChatRoomId { get; set; }
         public string UserName { get; set; }

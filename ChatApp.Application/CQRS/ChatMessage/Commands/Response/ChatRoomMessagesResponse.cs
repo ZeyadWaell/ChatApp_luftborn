@@ -14,4 +14,3 @@ namespace ChatApp.Application.CQRS.ChatMessage.Commands.Response
         public DateTime Timestamp { get; set; }
     }
 }
-}

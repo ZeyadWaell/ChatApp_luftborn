@@ -1,5 +1,4 @@
 ﻿using ChatApp.Application.CQRS.ChatMessage.Commands.Models;
-using ChatApp.Application.CQRS.Commands.Chat.Models;
 using ChatApp.Application.CQRS.Requests.Chat.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

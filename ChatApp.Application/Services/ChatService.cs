@@ -19,6 +19,19 @@ namespace ChatApp.Application.Services
         {
             _unitOfWork = unitOfWork;
         }
+        
+        public async Task<ApiResponse<ChatRoomResponse>> LeaveRoomAsync(LeaveRoomRequest request)
+        {
+            var response = new ChatRoomResponse
+            {
+                ChatRoomId = request.ChatRoomId,
+                RoomName = " Test :",
+                Participants = new List<string> { request.UserName },
+                LastActive = DateTime.UtcNow
+            };
+            return ResponseHandler.Success(response, $"{request.UserName} has joined {request.ChatRoomId}.");
+        }
+
 
         public async Task<ApiResponse<ChatMessageResponse>> SendMessageAsync(SendMessageRequest request)
         {
@@ -84,16 +97,16 @@ namespace ChatApp.Application.Services
             }, "Message deleted successfully.");
         }
 
-        public async Task<ApiResponse<List<ChatRoomMessagesResponse>>> GetChatRoomMessagesAsync(Guid chatRoomId)
+        public async Task<ApiResponse<IList<ChatMessageResponse>>> GetChatRoomMessagesAsync(Guid chatRoomId)
         {
             var messages = await _unitOfWork.ChatMessageRepository.GetMessagesByChatRoomAsync(chatRoomId);
 
             if (messages == null || !messages.Any())
             {
-                return ResponseHandler.Failure<List<ChatRoomMessagesResponse>>("No messages found for this chat room.");
+                return ResponseHandler.Failure<IList<ChatMessageResponse>>("No messages found for this chat room.");
             }
 
-            var response = messages.Select(m => new ChatRoomMessagesResponse
+            var response = messages.Select(m => new ChatMessageResponse
             {
                 MessageId = m.Id,
                 Message = m.Message,
@@ -101,7 +114,12 @@ namespace ChatApp.Application.Services
                 Timestamp = m.Timestamp
             }).ToList();
 
-            return ResponseHandler.Success(response, "Messages retrieved successfully.");
+            return ResponseHandler.Success<IList<ChatMessageResponse>>(response, "Messages retrieved successfully.");
+        }
+
+        public Task<ApiResponse<ChatRoomResponse>> JoinRoomAsync(JoinRoomRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }
