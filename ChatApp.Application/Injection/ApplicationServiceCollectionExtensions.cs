@@ -1,20 +1,23 @@
 ﻿using ChatApp.Application.BotStrategies;
+using ChatApp.Application.CQRS.Commands.Auth;
+using ChatApp.Application.Services.CQRSS.inteface;
+using ChatApp.Application.Services.CQRSS;
 using ChatApp.Application.Strategies.Bot;
-using ChatApp.Core.Interfaces.Main;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using ChatApp.Application.Services;
 
-namespace ChatApp.Api.ModuleInfrastructureDependencies
+public static class ApplicationServiceCollectionExtensions
 {
-    public static class ApplicationServiceCollectionExtensions
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
-        {
-            // Register MediatR, services, and AutoMapper if needed.
-         //   services.AddMediatR(typeof(CreateChatMessageCommand).Assembly);
-   //         services.AddTransient<IChatMessageService, ChatMessageService>();
-            services.AddTransient<IBotStrategyFactory, BotStrategyFactory>();
-            return services;
-        }
-    }
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(LoginUserCommandHandler).Assembly));
 
+        services.AddTransient<ITokenService, TokenService>();
+        services.AddTransient<IBotStrategyFactory, BotStrategyFactory>();
+        services.AddTransient<IAuthService, AuthService>();
+
+        return services;
+    }
 }

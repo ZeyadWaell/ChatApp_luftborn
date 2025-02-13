@@ -4,12 +4,7 @@ using ChatApp.Infrastructure.Data;
 using ChatApp.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
 using ChatApp.API.Injection;
-using ChatApp.Api.ModuleInfrastructureDependencies;
 using ChatApp.Api.Hubs;
 using ChatApp.Routes;
 

@@ -8,6 +8,8 @@
     public class AccountRoutes : BaseRoute
     {
         public const string Controller = Base + "/account";
+        public const string Login =  "login";
+        public const string Register = "register";  
     }
 
     public class ChatRoutes : BaseRoute

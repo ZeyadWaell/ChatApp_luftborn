@@ -1,6 +1,9 @@
 ﻿using ChatApp.Application.CQRS.Auth.Commands.Models;
 using ChatApp.Application.CQRS.Auth.Commands.Response;
+using ChatApp.Application.Services.CQRSS.inteface;
+using ChatApp.Application.Utilities.Class;
 using MediatR;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +12,19 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Application.CQRS.Auth.Commands.Handlers
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserRequest, RegisterUserResponse>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserRequest, ApiResponse<RegisterUserResponse>>
     {
-        public RegisterUserCommandHandler()
+        private readonly IAuthService _authServices;
+
+        public RegisterUserCommandHandler(IAuthService authServices)
         {
+            _authServices = authServices;
         }
-        public Task<RegisterUserResponse> Handle(RegisterUserRequest request, CancellationToken cancellationToken)
+
+
+        public async Task<ApiResponse<RegisterUserResponse>> Handle(RegisterUserRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           return await _authServices.HandleRegister(request);
         }
     }
 }
