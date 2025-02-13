@@ -7,24 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="CQRS\Auth\Commands\Validator\" />
+    <Folder Include="CQRS\Auth\Queries\Handlers\" />
+    <Folder Include="CQRS\Auth\Queries\Models\" />
+    <Folder Include="CQRS\Auth\Queries\Response\" />
     <Folder Include="CQRS\ChatMessage\Commands\Handlers\" />
     <Folder Include="CQRS\ChatMessage\Commands\Models\" />
     <Folder Include="CQRS\ChatMessage\Commands\Validator\" />
     <Folder Include="CQRS\ChatMessage\Queries\Handlers\" />
     <Folder Include="CQRS\ChatMessage\Queries\Models\" />
     <Folder Include="CQRS\ChatMessage\Queries\Response\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="MediatR" Version="12.4.1" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
   </ItemGroup>
 
   <ItemGroup>

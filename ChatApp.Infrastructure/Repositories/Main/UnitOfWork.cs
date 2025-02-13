@@ -4,7 +4,7 @@ using ChatApp.Core.Interfaces.Main;
 using ChatApp.Infrastructure.Data;
 using ChatApp.Infrastructure.Repositories;
 
-namespace ChatApp.Infrastructure.UnitOfWork
+namespace ChatApp.Infrastructure.Repositories.Main
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -5,7 +5,8 @@ using ChatApp.Infrastructure.Data;
 using ChatApp.Core.Interfaces;
 using ChatApp.Infrastructure.Repositories;
 using ChatApp.Infrastructure.ExternalServices;
-
+using ChatApp.Core.Interfaces.Main;
+using ChatApp.Infrastructure.Repositories.Main;
 
 namespace ChatApp.Infrastructure.Injection
 {
@@ -18,12 +19,14 @@ namespace ChatApp.Infrastructure.Injection
             services.AddDbContext<ChatDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("ChatConnection")));
 
-       //     services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
             services.AddScoped<IChatRoomRepository, ChatRoomRepository>();
             services.AddScoped<IChatRoomMemberRepository, ChatRoomMemberRepository>();
 
-            // Register external bot strategies
+
+
             services.AddTransient<IBotStrategy, GeminiBotStrategy>();
             services.AddTransient<IBotStrategy, ChatGPTBotStrategy>();
 
