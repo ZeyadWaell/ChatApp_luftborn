@@ -11,7 +11,6 @@ namespace ChatApp.Infrastructure.ExternalServices
     {
         public async Task<string> ProcessMessageAsync(string message)
         {
-            // Simulate an external API call to ChatGPT.
             await Task.Delay(100);
             return $"[ChatGPT] Processed message: {message}";
         }
